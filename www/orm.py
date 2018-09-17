@@ -118,7 +118,8 @@ class TextField(Field):
 class ModelMetaclass(type):
     def __new__(cls, name, bases, attrs):  # 用metaclass=ModelMetaclass创建类时，通过这个方法生成类
         if name == 'Model':  # 定制Model类
-            return type.__new__(cls, name, bases, attrs)  # 当前准备创建的类的对象、类的名字model、类继承的父类集合、类的方法集合
+            # 当前准备创建的类的对象、类的名字model、类继承的父类集合、类的方法集合
+            return type.__new__(cls, name, bases, attrs)
         tableName = attrs.get('__table__', None) or name  # 获取表名，默认为None，或为类名
         logging.info('found model: %s (table: %s)' % (name, tableName))  # 类名、表名
         mappings = dict()  # 用于存储列名和对应的数据类型
@@ -138,6 +139,7 @@ class ModelMetaclass(type):
             raise Exception('Primary key not found.')
         for k in mappings.keys():  # 过滤掉列，只剩方法
             attrs.pop(k)
+        # lambda表达式，通常是在需要一个函数，但是又不想费神去命名一个函数的场合下使用，也就是指匿名函数。
         escaped_fields = list(map(lambda f: '`%s`' % f, fields))  # 给非主键列加``（可执行命令）区别于''（字符串效果）
         attrs['__mappings__'] = mappings  # 保持属性和列的映射关系
         attrs['__table__'] = tableName  # 表名

@@ -22,6 +22,7 @@ def next_id():
 
 
 class User(Model):
+    ' 用户类 '
     __table__ = 'users'
 
     id = StringField(primary_key=True, default=next_id, ddl='varchar(50)')
@@ -34,6 +35,7 @@ class User(Model):
 
 
 class Blog(Model):
+    ' 博客类 '
     __table__ = 'blogs'
 
     id = StringField(primary_key=True, default=next_id, ddl='varchar(50)')
@@ -47,6 +49,7 @@ class Blog(Model):
 
 
 class Comment(Model):
+    ' 评论类 '
     __table__ = 'comments'
 
     id = StringField(primary_key=True, default=next_id, ddl='varchar(50)')

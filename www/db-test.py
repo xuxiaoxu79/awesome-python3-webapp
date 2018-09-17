@@ -2,7 +2,10 @@ import logging
 import orm
 import asyncio
 from models import User
-logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s',
+    level=logging.INFO
+)
 
 
 async def test(loop):
